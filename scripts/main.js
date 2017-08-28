@@ -43,7 +43,7 @@ function urlB64ToUint8Array(base64String) {
   return outputArray;
 }
 
-function updateBtn() {
+function updateBtn(err) {
   if (Notification.permission === 'denied') {
     pushButton.textContent = 'Push Messaging Blocked.';
     pushButton.disabled = true;
@@ -53,8 +53,10 @@ function updateBtn() {
 
   if (isSubscribed) {
     pushButton.textContent = 'Disable Push Messaging';
+    document.querySelector('.error-msg').innerText = '';
   } else {
     pushButton.textContent = 'Enable Push Messaging';
+    document.querySelector('.error-msg').innerText = JSON.stringify(err);
   }
 
   pushButton.disabled = false;
@@ -92,7 +94,7 @@ function subscribeUser() {
   })
   .catch(function(err) {
     console.log('Failed to subscribe the user: ', err);
-    updateBtn();
+    updateBtn(err);
   });
 }
 
@@ -119,6 +121,8 @@ function unsubscribeUser() {
 function initialiseUI() {
   pushButton.addEventListener('click', function() {
     pushButton.disabled = true;
+    document.querySelector('.error-msg').innerText = '';
+
     if (isSubscribed) {
       unsubscribeUser();
     } else {
