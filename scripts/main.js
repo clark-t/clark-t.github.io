@@ -83,6 +83,10 @@ function subscribeUser() {
     userVisibleOnly: true,
     applicationServerKey: applicationServerKey
   })
+  .catch(function(err) {
+    console.log('Failed to subscribe the user: ', err);
+    updateBtn(err);
+  })
   .then(function(subscription) {
     console.log('User is subscribed.');
 
