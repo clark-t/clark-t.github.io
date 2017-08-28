@@ -53,7 +53,6 @@ function updateBtn(err) {
 
   if (isSubscribed) {
     pushButton.textContent = 'Disable Push Messaging';
-    document.querySelector('.error-msg').innerText = '';
   } else {
     pushButton.textContent = 'Enable Push Messaging';
     document.querySelector('.error-msg').innerText = JSON.stringify(err);
@@ -82,10 +81,6 @@ function subscribeUser() {
   swRegistration.pushManager.subscribe({
     userVisibleOnly: true,
     applicationServerKey: applicationServerKey
-  })
-  .catch(function(err) {
-    console.log('Failed to subscribe the user: ', err);
-    updateBtn(err);
   })
   .then(function(subscription) {
     console.log('User is subscribed.');
