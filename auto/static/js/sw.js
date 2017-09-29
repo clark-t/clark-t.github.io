@@ -1,1 +1,130 @@
-!function(t){function n(r){if(e[r])return e[r].exports;var c=e[r]={i:r,l:!1,exports:{}};return t[r].call(c.exports,c,c.exports,n),c.l=!0,c.exports}var e={};n.m=t,n.c=e,n.i=function(t){return t},n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:r})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,n){return Object.prototype.hasOwnProperty.call(t,n)},n.p="/static/",n(n.s=231)}({231:function(t,n){function e(t){return(t.url.match(location.origin)?fetch(t):fetch(t.url,{"no-cors":!0})).then(function(n){var e=n.clone();return n.ok&&caches.open(c).then(function(e){return e.put(t,n)}),e}).catch(function(t){throw t})}function r(t){return caches.match(t)}var c="v1";self.addEventListener("install",function(t){t.waitUntil(fetch("/").then(function(t){caches.open(c).then(function(n){n.put("/",t),self.skipWaiting()})}))}),self.addEventListener("active",function(t){return self.clients.claim()}),self.addEventListener("fetch",function(t){var n=t.request,c=n.method,i=n.url,o=n.headers;if("GET"===c)if(-1!==o.get("Accept").indexOf("text/html")||i.match(/(css|js)$/)){var u=e(n);t.respondWith(r(n).then(function(t){return t||u}))}else i.match(/(png|jpg|jpeg)$/)&&t.respondWith(r(n).then(function(t){return t||e(n)}))})}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/static/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 231);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 231:
+/***/ (function(module, exports) {
+
+var cacheKey = 'v1';
+self.addEventListener('install', function (event) {
+  event.waitUntil(fetch('/').then(function (response) {
+    caches.open(cacheKey).then(function (cache) {
+      cache.put('/', response);
+      self.skipWaiting();
+    });
+  }));
+});
+
+self.addEventListener('active', function (event) {
+  return self.clients.claim();
+});
+
+function remote(request) {
+  var noCors = !request.url.match(location.origin);
+  return (noCors ? fetch(request.url, { 'no-cors': true }) : fetch(request)).then(function (response) {
+    var copy = response.clone();
+    if (response.ok) {
+      caches.open(cacheKey).then(function (cache) {
+        return cache.put(request, response);
+      });
+    }
+    return copy;
+  }).catch(function (err) {
+    throw err;
+  });
+}
+
+function local(request) {
+  return caches.match(request);
+}
+
+// 监听fetch
+self.addEventListener('fetch', function (event) {
+  var request = event.request;
+  var method = request.method,
+      url = request.url,
+      headers = request.headers;
+
+  if (method === 'GET') {
+    if (headers.get('Accept').indexOf('text/html') !== -1 || url.match(/(css|js)$/)) {
+      var remoteAsk = remote(request);
+      event.respondWith(local(request).then(function (cacheResponse) {
+        return cacheResponse || remoteAsk;
+      }));
+    } else if (url.match(/(png|jpg|jpeg)$/)) {
+      event.respondWith(local(request).then(function (cacheResponse) {
+        return cacheResponse || remote(request);
+      }));
+    }
+  }
+});
+
+/***/ })
+
+/******/ });
