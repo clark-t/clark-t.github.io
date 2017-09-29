@@ -7243,50 +7243,51 @@ function genWaiter() {
         while (1) {
             switch (_context.prev = _context.next) {
                 case 0:
+                    console.log('start to test cache');
                     i = list.length - 1;
 
-                case 1:
+                case 2:
                     if (!(i > -1)) {
-                        _context.next = 7;
+                        _context.next = 8;
                         break;
                     }
 
-                    _context.next = 4;
+                    _context.next = 5;
                     return __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].put('feature', 0, list[i]);
 
-                case 4:
+                case 5:
                     i--;
-                    _context.next = 1;
+                    _context.next = 2;
                     break;
 
-                case 7:
+                case 8:
                     hasSW = !!navigator.serviceWorker;
 
                     if (hasSW) {
-                        _context.next = 10;
+                        _context.next = 11;
                         break;
                     }
 
                     return _context.abrupt('return');
 
-                case 10:
+                case 11:
                     waiter = genWaiter();
-                    _context.next = 13;
+                    _context.next = 14;
                     return navigator.serviceWorker.register('/auto/cache-sw.js', { scope: '/auto/' });
 
-                case 13:
+                case 14:
                     reg = _context.sent;
-                    _context.next = 16;
+                    _context.next = 17;
                     return waiter;
 
-                case 16:
-                    _context.next = 18;
+                case 17:
+                    _context.next = 19;
                     return reg.unregister();
 
-                case 18:
+                case 19:
                     console.log('cache test finished');
 
-                case 19:
+                case 20:
                 case 'end':
                     return _context.stop();
             }
@@ -7920,104 +7921,123 @@ function genWaiter() {
         while (1) {
             switch (_context5.prev = _context5.next) {
                 case 0:
+                    console.log('start to post message');
                     hasSW = !!navigator.serviceWorker;
 
                     if (hasSW) {
-                        _context5.next = 3;
+                        _context5.next = 4;
                         break;
                     }
 
                     return _context5.abrupt('return');
 
-                case 3:
+                case 4:
+                    console.log('get waiter');
                     messageWaiter = genWaiter();
+                    // console.log(navigator.serviceWorker);
 
-                    console.log(navigator.serviceWorker);
                     activatedWaiter = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.race([__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_utils__["i" /* promisifyOneTimeEventListener */])(function (evt) {
                         return console.log('controllerchange');
                     }, navigator.serviceWorker, 'controllerchange'), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_utils__["d" /* sleep */])(3000)]);
-                    _context5.next = 8;
+
+                    console.log('start to register');
+                    _context5.next = 10;
                     return navigator.serviceWorker.register('/auto/postmessage-sw.js', { scope: '/auto/' });
 
-                case 8:
+                case 10:
                     reg = _context5.sent;
 
                     console.log('Registered!', reg);
-                    _context5.next = 12;
+                    _context5.next = 14;
                     return activatedWaiter;
 
-                case 12:
-                    _context5.prev = 12;
+                case 14:
+                    _context5.prev = 14;
 
                     console.log(reg.active.postMessage, 'ready');
                     reg.active.postMessage({
                         text: 'Hi!',
                         port: messageChannel && messageChannel.port2
                     }, [messageChannel && messageChannel.port2]);
-                    _context5.next = 17;
+                    _context5.next = 19;
                     return __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].put('feature', 1, 'main-msg-send');
 
-                case 17:
-                    _context5.next = 25;
+                case 19:
+                    _context5.next = 35;
                     break;
 
-                case 19:
-                    _context5.prev = 19;
-                    _context5.t0 = _context5['catch'](12);
+                case 21:
+                    _context5.prev = 21;
+                    _context5.t0 = _context5['catch'](14);
 
+                    console.log('error occur when post message');
                     console.error(_context5.t0);
+                    _context5.prev = 25;
+
                     // getting a cloning error in Firefox
                     reg.active.postMessage({
                         text: 'Hi!'
                     });
-                    _context5.next = 25;
+                    _context5.next = 29;
                     return __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].put('feature', 0.5, 'main-msg-send');
 
-                case 25:
-                    _context5.next = 27;
+                case 29:
+                    _context5.next = 35;
+                    break;
+
+                case 31:
+                    _context5.prev = 31;
+                    _context5.t1 = _context5['catch'](25);
+
+                    console.log('error again');
+                    console.log(_context5.t1);
+
+                case 35:
+                    _context5.next = 37;
                     return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.race([messageWaiter, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_utils__["d" /* sleep */])(3000)]);
 
-                case 27:
+                case 37:
                     list = ['sw-msg-send', 'sw-msg-got', 'main-msg-send', 'main-msg-got'];
                     point = 0;
                     i = list.length - 1;
 
-                case 30:
+                case 40:
                     if (!(i > -1)) {
-                        _context5.next = 38;
+                        _context5.next = 48;
                         break;
                     }
 
-                    _context5.next = 33;
+                    _context5.next = 43;
                     return __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].get('feature', list[i]);
 
-                case 33:
+                case 43:
                     bias = _context5.sent;
 
                     point += parseFloat(bias);
 
-                case 35:
+                case 45:
                     i--;
-                    _context5.next = 30;
+                    _context5.next = 40;
                     break;
 
-                case 38:
-                    _context5.next = 40;
+                case 48:
+                    _context5.next = 50;
                     return __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].put('feature', point / list.length, 'postMessage');
 
-                case 40:
-                    _context5.next = 42;
+                case 50:
+                    _context5.next = 52;
                     return reg.unregister();
 
-                case 42:
+                case 52:
                     console.log('Unregistered');
+                    console.log('end to post message');
 
-                case 43:
+                case 54:
                 case 'end':
                     return _context5.stop();
             }
         }
-    }, _callee5, this, [[12, 19]]);
+    }, _callee5, this, [[14, 21], [25, 31]]);
 })));
 
 /***/ }),
