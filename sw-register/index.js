@@ -51,6 +51,6 @@ function print(wrapper, msg) {
     div.style.wordBreak = 'break-all';
     div.style.paddingBottom = '10px';
     div.innerText = JSON.stringify(msg);
-    wrapper.appendChild(msg);
+    wrapper.appendChild(div);
 }
 
