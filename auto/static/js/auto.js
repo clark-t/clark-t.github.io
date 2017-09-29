@@ -9650,58 +9650,59 @@ var _search2obj = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_17_utils__["f"
 
 (function () {
     var _ref = __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var consoleLog, consoleError, consoleWarn, id, ua, uaInfo, search;
+        var id, ua, uaInfo, search;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        consoleLog = window.console.log;
-                        consoleError = window.console.error;
-                        consoleWarn = window.console.warn;
-
+                        // const consoleLog = window.console.log;
+                        // const consoleError = window.console.error;
+                        // const consoleWarn = window.console.warn;
 
                         window.console.log = function () {
-                            if ((typeof window === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_typeof___default()(window)) === 'object') {
+                            if ((typeof window === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_typeof___default()(window)) === 'object' && __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_typeof___default()(window.document) === 'object') {
                                 var div = document.createElement('div');
                                 div.style.wordBreak = 'break-all';
                                 div.style.paddingBottom = '10px';
                                 div.innerHTML = __WEBPACK_IMPORTED_MODULE_4_babel_runtime_core_js_json_stringify___default()(arguments.length <= 0 ? undefined : arguments[0]);
                                 document.body.appendChild(div);
                             }
-                            consoleLog.apply(undefined, arguments);
+                            // consoleLog(...args);
                         };
 
                         window.console.error = function () {
-                            if ((typeof window === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_typeof___default()(window)) === 'object') {
+                            if ((typeof window === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_typeof___default()(window)) === 'object' && __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_typeof___default()(window.document) === 'object') {
                                 var div = document.createElement('div');
                                 div.style.wordBreak = 'break-all';
                                 div.style.paddingBottom = '10px';
                                 div.innerHTML = __WEBPACK_IMPORTED_MODULE_4_babel_runtime_core_js_json_stringify___default()(arguments.length <= 0 ? undefined : arguments[0]);
                                 document.body.appendChild(div);
                             }
-                            consoleError.apply(undefined, arguments);
+                            // consoleError(...args);
                         };
 
                         window.console.warn = function () {
-                            if ((typeof window === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_typeof___default()(window)) === 'object') {
+                            if ((typeof window === 'undefined' ? 'undefined' : __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_typeof___default()(window)) === 'object' && __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_typeof___default()(window.document) === 'object') {
                                 var div = document.createElement('div');
                                 div.style.wordBreak = 'break-all';
                                 div.style.paddingBottom = '10px';
                                 div.innerHTML = __WEBPACK_IMPORTED_MODULE_4_babel_runtime_core_js_json_stringify___default()(arguments.length <= 0 ? undefined : arguments[0]);
                                 document.body.appendChild(div);
                             }
-                            consoleWarn.apply(undefined, arguments);
+                            // consoleWarn(...args);
                         };
 
                         console.log('start to test');
 
                         // 生成 uuid
-                        _context.next = 9;
+                        _context.next = 6;
                         return __WEBPACK_IMPORTED_MODULE_18_store__["a" /* default */].get('uuid', 'id');
 
-                    case 9:
+                    case 6:
                         id = _context.sent;
 
+
+                        console.log('get uuid');
 
                         if (!id) {
                             id = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_17_utils__["g" /* uuid */])();
@@ -9711,29 +9712,29 @@ var _search2obj = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_17_utils__["f"
                         // 如若是manifest的测试,直接返回了
 
                         if (!(fr === 'manifesticon')) {
-                            _context.next = 23;
+                            _context.next = 21;
                             break;
                         }
 
-                        _context.next = 14;
+                        _context.next = 12;
                         return __WEBPACK_IMPORTED_MODULE_18_store__["a" /* default */].get('info', 'ua');
 
-                    case 14:
+                    case 12:
                         ua = _context.sent;
 
                         if (ua) {
-                            _context.next = 18;
+                            _context.next = 16;
                             break;
                         }
 
-                        _context.next = 18;
+                        _context.next = 16;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__env_main__["a" /* default */])();
 
-                    case 18:
-                        _context.next = 20;
+                    case 16:
+                        _context.next = 18;
                         return setUa('info', __WEBPACK_IMPORTED_MODULE_21__helper__["b" /* infoKeys */]);
 
-                    case 20:
+                    case 18:
                         uaInfo = _context.sent;
 
 
@@ -9751,7 +9752,7 @@ var _search2obj = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_17_utils__["f"
 
                         return _context.abrupt('return');
 
-                    case 23:
+                    case 21:
 
                         // 如果是step=1刷新，则重定向到step=0，重新走测试流程
                         if (step === '1' && localStorage.getItem('from') !== 'step0') {
@@ -9761,89 +9762,89 @@ var _search2obj = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_17_utils__["f"
                         }
 
                         _context.t0 = step;
-                        _context.next = _context.t0 === '0' ? 27 : _context.t0 === '1' ? 41 : 66;
+                        _context.next = _context.t0 === '0' ? 25 : _context.t0 === '1' ? 39 : 64;
                         break;
 
-                    case 27:
+                    case 25:
                         localStorage.setItem('from', 'step0');
-                        _context.next = 30;
+                        _context.next = 28;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_12__init_main__["a" /* default */])();
+
+                    case 28:
+                        _context.next = 30;
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__env_main__["a" /* default */])();
 
                     case 30:
                         _context.next = 32;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__env_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
                     case 32:
                         _context.next = 34;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__global_main__["a" /* default */])();
 
                     case 34:
                         _context.next = 36;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__global_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
                     case 36:
                         _context.next = 38;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
-
-                    case 38:
-                        _context.next = 40;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__empty_main__["a" /* default */])();
 
-                    case 40:
+                    case 38:
                         return _context.abrupt('return');
+
+                    case 39:
+                        _context.next = 41;
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
                     case 41:
                         _context.next = 43;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__lifecycle_main__["a" /* default */])();
 
                     case 43:
                         _context.next = 45;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__lifecycle_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
                     case 45:
                         _context.next = 47;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__postmessage_main__["a" /* default */])();
 
                     case 47:
                         _context.next = 49;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__postmessage_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
                     case 49:
                         _context.next = 51;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__sync_main__["a" /* default */])();
 
                     case 51:
                         _context.next = 53;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__sync_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
                     case 53:
                         _context.next = 55;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_15__cache_main__["a" /* default */])();
 
                     case 55:
                         _context.next = 57;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_15__cache_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
                     case 57:
                         _context.next = 59;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_16__push_main__["a" /* default */])();
 
                     case 59:
                         _context.next = 61;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_16__push_main__["a" /* default */])();
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
                     case 61:
                         _context.next = 63;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
-
-                    case 63:
-                        _context.next = 65;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__summary_main__["a" /* default */])();
 
-                    case 65:
-                        return _context.abrupt('break', 66);
+                    case 63:
+                        return _context.abrupt('break', 64);
 
-                    case 66:
+                    case 64:
                     case 'end':
                         return _context.stop();
                 }
