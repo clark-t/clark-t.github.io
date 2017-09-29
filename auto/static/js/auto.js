@@ -7426,50 +7426,52 @@ document.querySelector('.device span').innerHTML = device.type + ' ' + device.mo
         while (1) {
             switch (_context.prev = _context.next) {
                 case 0:
-                    _context.next = 2;
+                    console.log('start to global test');
+                    _context.next = 3;
                     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__test__["a" /* default */])(window, 0);
 
-                case 2:
+                case 3:
                     hasSW = !!navigator.serviceWorker;
                     // test if we suggest navigator.serviceWorker
 
-                    _context.next = 5;
+                    _context.next = 6;
                     return __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].put('feature', Number(hasSW), 'navigator.serviceWorker');
 
-                case 5:
+                case 6:
                     if (hasSW) {
-                        _context.next = 8;
+                        _context.next = 9;
                         break;
                     }
 
                     console.log('has not sw!');
                     return _context.abrupt('return');
 
-                case 8:
-                    _context.next = 10;
+                case 9:
+                    console.log('start to register');
+                    _context.next = 12;
                     return navigator.serviceWorker.register('/auto/global-sw.js', { scope: '/auto/' });
 
-                case 10:
+                case 12:
                     sw = _context.sent;
 
                     console.log('Registered!', sw);
-                    _context.next = 14;
-                    return __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].put('feature', 1, 'Registered');
-
-                case 14:
                     _context.next = 16;
-                    return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_utils__["d" /* sleep */])(3000);
+                    return __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].put('feature', 1, 'Registered');
 
                 case 16:
                     _context.next = 18;
-                    return sw.unregister();
+                    return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_utils__["d" /* sleep */])(3000);
 
                 case 18:
+                    _context.next = 20;
+                    return sw.unregister();
+
+                case 20:
                     console.log('Unregistered');
-                    _context.next = 21;
+                    _context.next = 23;
                     return __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].put('feature', 1, 'Unregistered');
 
-                case 21:
+                case 23:
                 case 'end':
                     return _context.stop();
             }
@@ -7499,37 +7501,46 @@ document.querySelector('.device span').innerHTML = device.type + ' ' + device.mo
         while (1) {
             switch (_context.prev = _context.next) {
                 case 0:
-                    _context.next = 2;
+                    console.log('start to init');
+
+                    _context.next = 3;
                     return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_promise___default.a.all([__WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].clear('feature'), __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].clear('info')]);
 
-                case 2:
-                    _context.next = 4;
+                case 3:
+                    _context.next = 5;
                     return __WEBPACK_IMPORTED_MODULE_3_store__["a" /* default */].put('info', 0, 'schedule');
 
-                case 4:
+                case 5:
+                    console.log('start to unregister');
+
                     if (navigator.serviceWorker) {
-                        _context.next = 6;
+                        _context.next = 9;
                         break;
                     }
 
+                    console.log('no sw');
                     return _context.abrupt('return');
 
-                case 6:
-                    _context.next = 8;
+                case 9:
+                    _context.next = 11;
                     return navigator.serviceWorker.getRegistration();
 
-                case 8:
+                case 11:
                     reg = _context.sent;
 
                     if (!(reg && reg.unregitster)) {
-                        _context.next = 12;
+                        _context.next = 16;
                         break;
                     }
 
-                    _context.next = 12;
+                    console.log('unregister');
+                    _context.next = 16;
                     return reg.unregitster();
 
-                case 12:
+                case 16:
+                    console.log('unregister finish');
+
+                case 17:
                 case 'end':
                     return _context.stop();
             }
@@ -9682,11 +9693,13 @@ var _search2obj = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_17_utils__["f"
                             consoleWarn.apply(undefined, arguments);
                         };
 
+                        console.log('start to test');
+
                         // 生成 uuid
-                        _context.next = 8;
+                        _context.next = 9;
                         return __WEBPACK_IMPORTED_MODULE_18_store__["a" /* default */].get('uuid', 'id');
 
-                    case 8:
+                    case 9:
                         id = _context.sent;
 
 
@@ -9698,29 +9711,29 @@ var _search2obj = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_17_utils__["f"
                         // 如若是manifest的测试,直接返回了
 
                         if (!(fr === 'manifesticon')) {
-                            _context.next = 22;
+                            _context.next = 23;
                             break;
                         }
 
-                        _context.next = 13;
+                        _context.next = 14;
                         return __WEBPACK_IMPORTED_MODULE_18_store__["a" /* default */].get('info', 'ua');
 
-                    case 13:
+                    case 14:
                         ua = _context.sent;
 
                         if (ua) {
-                            _context.next = 17;
+                            _context.next = 18;
                             break;
                         }
 
-                        _context.next = 17;
+                        _context.next = 18;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__env_main__["a" /* default */])();
 
-                    case 17:
-                        _context.next = 19;
+                    case 18:
+                        _context.next = 20;
                         return setUa('info', __WEBPACK_IMPORTED_MODULE_21__helper__["b" /* infoKeys */]);
 
-                    case 19:
+                    case 20:
                         uaInfo = _context.sent;
 
 
@@ -9738,7 +9751,7 @@ var _search2obj = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_17_utils__["f"
 
                         return _context.abrupt('return');
 
-                    case 22:
+                    case 23:
 
                         // 如果是step=1刷新，则重定向到step=0，重新走测试流程
                         if (step === '1' && localStorage.getItem('from') !== 'step0') {
@@ -9748,89 +9761,89 @@ var _search2obj = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_17_utils__["f"
                         }
 
                         _context.t0 = step;
-                        _context.next = _context.t0 === '0' ? 26 : _context.t0 === '1' ? 40 : 65;
+                        _context.next = _context.t0 === '0' ? 27 : _context.t0 === '1' ? 41 : 66;
                         break;
 
-                    case 26:
+                    case 27:
                         localStorage.setItem('from', 'step0');
-                        _context.next = 29;
+                        _context.next = 30;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_12__init_main__["a" /* default */])();
 
-                    case 29:
-                        _context.next = 31;
+                    case 30:
+                        _context.next = 32;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__env_main__["a" /* default */])();
 
-                    case 31:
-                        _context.next = 33;
+                    case 32:
+                        _context.next = 34;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
-                    case 33:
-                        _context.next = 35;
+                    case 34:
+                        _context.next = 36;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__global_main__["a" /* default */])();
 
-                    case 35:
-                        _context.next = 37;
+                    case 36:
+                        _context.next = 38;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
-                    case 37:
-                        _context.next = 39;
+                    case 38:
+                        _context.next = 40;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__empty_main__["a" /* default */])();
 
-                    case 39:
+                    case 40:
                         return _context.abrupt('return');
 
-                    case 40:
-                        _context.next = 42;
+                    case 41:
+                        _context.next = 43;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
-                    case 42:
-                        _context.next = 44;
+                    case 43:
+                        _context.next = 45;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__lifecycle_main__["a" /* default */])();
 
-                    case 44:
-                        _context.next = 46;
+                    case 45:
+                        _context.next = 47;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
-                    case 46:
-                        _context.next = 48;
+                    case 47:
+                        _context.next = 49;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__postmessage_main__["a" /* default */])();
 
-                    case 48:
-                        _context.next = 50;
+                    case 49:
+                        _context.next = 51;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
-                    case 50:
-                        _context.next = 52;
+                    case 51:
+                        _context.next = 53;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__sync_main__["a" /* default */])();
 
-                    case 52:
-                        _context.next = 54;
+                    case 53:
+                        _context.next = 55;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
-                    case 54:
-                        _context.next = 56;
+                    case 55:
+                        _context.next = 57;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_15__cache_main__["a" /* default */])();
 
-                    case 56:
-                        _context.next = 58;
+                    case 57:
+                        _context.next = 59;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
-                    case 58:
-                        _context.next = 60;
+                    case 59:
+                        _context.next = 61;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_16__push_main__["a" /* default */])();
 
-                    case 60:
-                        _context.next = 62;
+                    case 61:
+                        _context.next = 63;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__result_main__["a" /* default */])();
 
-                    case 62:
-                        _context.next = 64;
+                    case 63:
+                        _context.next = 65;
                         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__summary_main__["a" /* default */])();
 
-                    case 64:
-                        return _context.abrupt('break', 65);
-
                     case 65:
+                        return _context.abrupt('break', 66);
+
+                    case 66:
                     case 'end':
                         return _context.stop();
                 }
