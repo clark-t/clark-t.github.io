@@ -8,13 +8,17 @@
 
     print(div, 'start to run');
 
-    navigator.serviceWorker.getRegistration()
+    navigator.serviceWorker.getRegistration('/sw-register/')
     .then(function (reg) {
         if (reg && reg.unregister) {
             print(div, 'there is some sw need to unregister');
+            console.log(reg);
             return reg.unregister()
-            .then(function () {
+            .then(function (re) {
+                console.log('unregister success');
+                console.log(re);
                 print(div, 'unregister success!');
+                window.location.reload();
             });
         }
 
@@ -25,14 +29,39 @@
         print(div, e);
     })
     .then(function () {
+        print(div, 'clean store');
+        return getStore()
+        .then(function (store) {
+            return Promise.all([
+                store.delete('sw-1').catch(function () {}),
+                store.delete('sw-2').catch(function () {})
+            ]);
+        });
+    })
+    .catch(function (error) {
+        print(div, 'maybe some error happen when delete store');
+        print(div, error);
+    })
+    .then(function () {
+        return wait(5000);
+    })
+    .then(function () {
+        print(div, 'start to register sw-1!');
         return sw.register('/sw-register/sw-1.js', {scope: '/sw-register/'});
     })
     .then(function (registration) {
-        print(div, 'register sw-1 !');
+        console.log('register sw-1 ~!');
+        console.log(registration);
+        // registration.unregister();
+        print(div, Date.now() + ': register sw-1 !');
     })
     .catch(function (err) {
         print(div, 'fail to register sw-1 !');
         print(div, err);
+    })
+    .then(function () {
+        print(div, 'now wait 6s for sw-1 running');
+        return wait(6000);
     })
     .then(function () {
         return getStore()
@@ -48,13 +77,20 @@
             print(div, error);
         });
     })
-    .then(sw.register.bind(sw, '/sw-register/sw-2.js', {scope: '/sw-register/'}))
+    .then(function () {
+        print(div, 'start to register sw-2!');
+        return sw.register('/sw-register/sw-2.js', {scope: '/sw-register/'});
+    })
     .then(function (registration) {
-        print(div, 'register sw-2 !');
+        print(div, Date.now() + ': register sw-2 !');
     })
     .catch(function (err) {
         print(div, 'fail to register sw-2 !');
         print(div, err);
+    })
+    .then(function () {
+        print(div, 'now wait 6s for sw-2 running');
+        return wait(6000);
     })
     .then(function () {
         return getStore()
@@ -78,6 +114,14 @@ function print(wrapper, msg) {
     div.style.paddingBottom = '10px';
     div.innerText = JSON.stringify(msg);
     wrapper.appendChild(div);
+}
+
+function wait(time) {
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve();
+        }, time || 0);
+    });
 }
 
 function getStore() {
@@ -105,7 +149,7 @@ function getStore() {
 
 function pifyStore(store) {
     var obj = {
-        get: function (key) {
+        'get': function (key) {
             return new Promise(function (resolve, reject) {
                 var request = store.get(key);
                 request.onsuccess = function (e) {
@@ -116,9 +160,20 @@ function pifyStore(store) {
                 };
             });
         },
-        put: function (val, key) {
+        'put': function (val, key) {
             return new Promise(function (resolve, reject) {
                 var request = store.put(val, key);
+                request.onsuccess = function (e) {
+                    resolve(e.target.result);
+                };
+                request.onerror = function (e) {
+                    reject(e);
+                };
+            });
+        },
+        'delete': function (key) {
+            return new Promise(function (resolve, reject) {
+                var request = store.delete(key);
                 request.onsuccess = function (e) {
                     resolve(e.target.result);
                 };
