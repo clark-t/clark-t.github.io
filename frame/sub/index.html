@@ -13,7 +13,7 @@
   <script>
     var $log = document.getElementById('log');
     var $log2 = document.getElementById('log2');
-    navigator.serviceWorker.register('/frame/sub/sw.js?v=1', {scope: '/frame/sub/'})
+    navigator.serviceWorker.register('https://clark-t.github.io/frame/sub/sw.js?v=1', {scope: '/frame/sub/'})
     .then(function (reg) {
         $log.innerHTML = 'success:' + JSON.stringify(reg);
     })
@@ -24,11 +24,11 @@
         return new Promise(function (resolve) {
             setTimeout(function () {
               resolve();
-            }, 5000);
+            }, 6000);
         });
     })
     .then(function () {
-        return navigator.serviceWorker.register('/frame/sub/sw-2.js?v=1', {scope: '/frame/sub/'});
+        return navigator.serviceWorker.register('https://clark-t.github.io/frame/sub/sw-2.js?v=1', {scope: '/frame/sub/'});
     })
     .then(function (reg) {
         $log2.innerHTML = 'success:' + JSON.stringify(reg);

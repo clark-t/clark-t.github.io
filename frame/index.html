@@ -14,9 +14,9 @@
     .then(function (reg) {
       setTimeout(function () {
           var iframe = document.createElement('iframe');
-          iframe.src = '/frame/sub/index.html';
+          iframe.src = 'https://clark-t.github.io/frame/sub/index.html';
           document.body.appendChild(iframe);
-      }, 5000);
+      }, 6000);
       $log.innerHTML = 'success';
     })
     .catch(function (err) {
