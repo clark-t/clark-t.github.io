@@ -13,7 +13,9 @@
   <script>
     var $log = document.getElementById('log');
     var $log2 = document.getElementById('log2');
-    navigator.serviceWorker.register('https://clark-t.github.io/frame/sub/sw.js?v=1', {scope: '/frame/sub/'})
+    navigator.serviceWorker.register(
+      'https://clark-t.github.io/frame/sub/sw.js?v=1', {scope: '/frame/sub/'}
+    )
     .then(function (reg) {
         $log.innerHTML = 'success:' + JSON.stringify(reg);
     })
@@ -39,3 +41,4 @@
   </script>
 </body>
 </html>
+
