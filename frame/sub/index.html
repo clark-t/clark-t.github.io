@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none';frame-src 'self': child-src 'self'; worker-src 'self'">
 </head>
 
 <body>
@@ -13,7 +14,7 @@
   <script>
     var $log = document.getElementById('log');
     var $log2 = document.getElementById('log2');
-    navigator.serviceWorker.register('./sw.js?v=1', {scope: '/frame/sub/'})
+    navigator.serviceWorker.register('/frame/sub/sw.js?v=1', {scope: '/frame/sub/'})
     .then(function (reg) {
         $log.innerHTML = 'success:' + JSON.stringify(reg);
     })
@@ -28,7 +29,7 @@
         });
     })
     .then(function () {
-        return navigator.serviceWorker.register('./sw-2.js?v=1', {scope: '/frame/sub/'});
+        return navigator.serviceWorker.register('/frame/sub/sw-2.js?v=1', {scope: '/frame/sub/'});
     })
     .then(function (reg) {
         $log2.innerHTML = 'success:' + JSON.stringify(reg);

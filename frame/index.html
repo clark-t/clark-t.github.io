@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none';frame-src 'self': child-src 'self'; worker-src 'self'">
 </head>
 
 <body>
@@ -14,6 +15,8 @@
     .then(function (reg) {
       setTimeout(function () {
           var iframe = document.createElement('iframe');
+          iframe.sandbox = 'allow-same-origin';
+          iframe.seamless = 'seamless';
           iframe.src = '/frame/sub/index.html';
           document.body.appendChild(iframe);
       }, 5000);
