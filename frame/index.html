@@ -14,8 +14,6 @@
     .then(function (reg) {
       setTimeout(function () {
           var iframe = document.createElement('iframe');
-          iframe.sandbox = 'allow-same-origin';
-          iframe.seamless = 'seamless';
           iframe.src = '/frame/sub/index.html';
           document.body.appendChild(iframe);
       }, 5000);
