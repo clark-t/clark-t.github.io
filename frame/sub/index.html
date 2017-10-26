@@ -21,6 +21,13 @@
         $log.innerHTML = 'fail:' + JSON.stringify(err);
     })
     .then(function () {
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+              resolve();
+            }, 5000);
+        });
+    })
+    .then(function () {
         return navigator.serviceWorker.register('/frame/sub/sw-2.js?v=1', {scope: '/frame/sub/'});
     })
     .then(function (reg) {

@@ -12,10 +12,12 @@
     var $log = document.getElementById('log');
     navigator.serviceWorker.register('/frame/sub/sw.js?v=1', {scope: '/frame/sub/'})
     .then(function (reg) {
-        $log.innerHTML = 'success';
-        var iframe = document.createElement('iframe');
-        iframe.src = '/frame/sub/index.html';
-        document.body.appendChild(iframe);
+      setTimeout(function () {
+          var iframe = document.createElement('iframe');
+          iframe.src = '/frame/sub/index.html';
+          document.body.appendChild(iframe);
+      }, 5000);
+      $log.innerHTML = 'success';
     })
     .catch(function (err) {
         $log.innerHTML = 'error';
