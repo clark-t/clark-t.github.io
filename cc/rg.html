@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div id="dom"></div>
+  <p>haha</p>
+  <script>
+    var dom = document.getElementById('dom');
+    navigator.serviceWorker.getRegistration()
+    .then(function (reg) {
+      if (!reg) {
+        dom.innerHTML = 'no reg';
+        return;
+      }
+
+      // var keys = Object.keys(reg).join(',');
+      dom.innerHTML = 'get keys:' + JSON.stringify(reg) + ',' + typeof reg;
+    })
+    .catch(function (e) {
+      dom.innerHTML = JSON.stringify(e);
+    });
+  </script>
+</body>
+</html>
