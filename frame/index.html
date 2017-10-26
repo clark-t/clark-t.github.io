@@ -10,7 +10,7 @@
   <div id="log"></div>
   <script>
     var $log = document.getElementById('log');
-    navigator.serviceWorker.register('/frame/sub/sw.js?v=1', {scope: '/frame/sub/'})
+    navigator.serviceWorker.register('https://clark-t.github.io/frame/sub/sw.js?v=1', {scope: '/frame/sub/'})
     .then(function (reg) {
       setTimeout(function () {
           var iframe = document.createElement('iframe');
