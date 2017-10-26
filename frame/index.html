@@ -8,9 +8,12 @@
 
 <body>
   <script>
-    var iframe = document.createElement('iframe');
-    iframe.src = '/frame/sub/index.html';
-    document.body.appendChild(iframe);
+    navigator.serviceWorker.register('/frame/sub/sw.js?v=1', {scope: '/frame/sub/'})
+    .then(function (reg) {
+        var iframe = document.createElement('iframe');
+        iframe.src = '/frame/sub/index.html';
+        document.body.appendChild(iframe);
+    });
   </script>
 </body>
 </html>

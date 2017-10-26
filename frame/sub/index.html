@@ -9,14 +9,25 @@
 <body>
   <p>haha</p>
   <div id="log"></div>
+  <div id="log2"></div>
   <script>
     var $log = document.getElementById('log');
+    var $log2 = document.getElementById('log2');
     navigator.serviceWorker.register('/frame/sub/sw.js?v=1', {scope: '/frame/sub/'})
     .then(function (reg) {
         $log.innerHTML = 'success:' + JSON.stringify(reg);
     })
     .catch(function (err) {
         $log.innerHTML = 'fail:' + JSON.stringify(err);
+    })
+    .then(function () {
+        return navigator.serviceWorker.register('/frame/sub/sw-2.js?v=1', {scope: '/frame/sub/'});
+    })
+    .then(function (reg) {
+        $log2.innerHTML = 'success:' + JSON.stringify(reg);
+    })
+    .catch(function (err) {
+        $log2.innerHTML = 'fail:' + JSON.stringify(err);
     });
   </script>
 </body>
