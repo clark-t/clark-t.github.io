@@ -9629,7 +9629,7 @@ exports.default = function (scope) {
                                                                                                 reg = void 0;
                                                                                                 _context.prev = 9;
                                                                                                 _context.next = 12;
-                                                                                                return navigator.serviceWorker.register(scope + 'sw-fetch.js', { scope: scope });
+                                                                                                return (0, _helper.register)(scope + 'sw-fetch.js', scope);
 
                                                                                     case 12:
                                                                                                 reg = _context.sent;
@@ -9787,30 +9787,43 @@ exports.default = function (scope) {
 
                                 (0, _log.log)('start to register sync sw');
                                 // syncEvent test
-                                _context.next = 6;
+                                reg = void 0;
+                                _context.prev = 5;
+                                _context.next = 8;
                                 return navigator.serviceWorker.register(scope + 'sw-sync.js', { scope: scope });
 
-                            case 6:
+                            case 8:
                                 reg = _context.sent;
+                                _context.next = 15;
+                                break;
+
+                            case 11:
+                                _context.prev = 11;
+                                _context.t0 = _context['catch'](5);
+
+                                (0, _log.log)('error in register');
+                                (0, _log.log)(_context.t0);
+
+                            case 15:
 
                                 (0, _log.log)('sync sw registered', reg);
 
-                                _context.next = 10;
+                                _context.next = 18;
                                 return (0, _helper.sleep)(3000);
 
-                            case 10:
+                            case 18:
                                 if (!(reg && reg.sync)) {
-                                    _context.next = 23;
+                                    _context.next = 31;
                                     break;
                                 }
 
                                 (0, _log.log)('has sync object');
                                 // sync register
-                                _context.prev = 12;
-                                _context.next = 15;
+                                _context.prev = 20;
+                                _context.next = 23;
                                 return reg.sync.getTags();
 
-                            case 15:
+                            case 23:
                                 tags = _context.sent;
 
                                 if (tags.includes('syncEventTest')) {
@@ -9819,38 +9832,42 @@ exports.default = function (scope) {
                                     reg.sync.register('syncEventTest');
                                     (0, _log.log)('sync registered');
                                 }
-                                _context.next = 23;
+                                _context.next = 31;
                                 break;
 
-                            case 19:
-                                _context.prev = 19;
-                                _context.t0 = _context['catch'](12);
+                            case 27:
+                                _context.prev = 27;
+                                _context.t1 = _context['catch'](20);
 
-                                (0, _log.log)('It broke (probably sync not supported or flag not enabled)', _context.t0.message);
+                                (0, _log.log)('It broke (probably sync not supported or flag not enabled)', _context.t1.message);
                                 // console.error(error.message);
                                 return _context.abrupt('return');
 
-                            case 23:
+                            case 31:
 
                                 (0, _log.log)('sleep for 5000');
 
-                                _context.next = 26;
+                                _context.next = 34;
                                 return (0, _helper.sleep)(5000);
 
-                            case 26:
-                                _context.next = 28;
+                            case 34:
+                                _context.next = 36;
                                 return reg.unregister();
 
-                            case 28:
+                            case 36:
                                 (0, _log.log)('sync: test finish');
 
-                            case 29:
+                            case 37:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, _this, [[12, 19]]);
+                }, _callee, _this, [[5, 11], [20, 27]]);
             }))();
+        },
+        error: function error(e) {
+            (0, _log.log)('error in sync');
+            (0, _log.log)(e);
         }
     };
 };
