@@ -9629,7 +9629,7 @@ exports.default = function (scope) {
                                                                                                 reg = void 0;
                                                                                                 _context.prev = 9;
                                                                                                 _context.next = 12;
-                                                                                                return (0, _helper.register)(scope + 'sw-fetch.js', scope);
+                                                                                                return navigator.serviceWorker.register(scope + 'sw-fetch.js', { scope: scope });
 
                                                                                     case 12:
                                                                                                 reg = _context.sent;
